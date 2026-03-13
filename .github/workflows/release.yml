@@ -38,11 +38,5 @@ jobs:
       - name: Build ports
         run: bash build.sh
 
-      - name: Build ISO
-        run: bash inject.sh
-
-      - name: Upload ISO
-        uses: actions/upload-artifact@v4
-        with:
-          name: microos
-          path: microos.iso
+      - name: release
+        run: MICROOS_BUILD_TOKEN=${{ secrets.MICROOS_BUILD_TOKEN }} MICROOS_UPLOAD_TOKEN=${{ secrets.MICROOS_UPLOAD_TOKEN }} bash website.sh
