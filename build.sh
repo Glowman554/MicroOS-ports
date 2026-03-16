@@ -28,3 +28,12 @@ function build() {
     build flc
     build jvm
 )
+
+if [ -d "MicroOS" ]; then
+    (
+        cd MicroOS
+        cp ../output/* initrd/ -r
+
+        make run
+    )
+fi
