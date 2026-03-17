@@ -2,7 +2,3 @@
 toolchain/build.log
 toolchain/build
 toolchain/src
-inject
-output
-microos.iso
-MicroOS

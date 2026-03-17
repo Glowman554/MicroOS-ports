@@ -24,15 +24,6 @@ jobs:
             build-essential bison flex libgmp-dev libmpc-dev libmpfr-dev \
             texinfo wget curl git xorriso autoconf automake \
             libtool pkg-config
-      - name: Setup github
-        run: |
-          git config --global user.email "vossjanick62@gmail.com"
-          git config --global user.name "Glowman554"
-      - name: Cache toolchain
-        uses: actions/cache@v4
-        with:
-          path: .toolchain
-          key: toolchain-${{ hashFiles('toolchain/build.sh', 'toolchain/libc/**') }}
 
       - name: Build toolchain
         run: |
@@ -40,12 +31,6 @@ jobs:
             cd toolchain
             bash build.sh
           fi
-
-      - name: Build ports
-        run: bash build.sh
-
-      - name: release
-        run: MICROOS_BUILD_TOKEN=${{ secrets.MICROOS_BUILD_TOKEN }} MICROOS_UPLOAD_TOKEN=${{ secrets.MICROOS_UPLOAD_TOKEN }} bash website.sh
 
       - name: Package toolchain
         run: tar -czf toolchain.tar.gz .toolchain
